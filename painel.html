@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="cupcake">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Painel Admin — Cardápio</title>
+
+  <!-- Tailwind + DaisyUI -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { plugins: [daisyui] }</script>
+
+  <!-- SweetAlert2 (edições/modais) -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <style>
+    .preview-img { width:72px; height:72px; object-fit:cover; border-radius:.5rem; border:1px solid rgba(0,0,0,0.06); }
+    .card-hover { transition: transform .18s ease, box-shadow .18s ease; }
+    .card-hover:hover { transform: translateY(-6px); box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
+  </style>
+</head>
+<body class="min-h-screen bg-gradient-to-r from-purple-100 to-pink-100 p-6">
+  <div class="max-w-5xl mx-auto">
+
+    <header class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
+      <div>
+        <h1 class="text-3xl font-extrabold text-purple-700">🍴 Painel de Administração</h1>
+        <p class="text-sm text-gray-600 mt-1">Adicione, edite ou remova alimentos — imagens, categoria e nutrientes são calculados automaticamente.</p>
+      </div>
+      <div class="flex gap-3">
+        <a href="publico.html" class="btn btn-ghost">Ver público</a>
+        <button id="btnLogout" class="btn btn-error">Sair</button>
+      </div>
+    </header>
+
+    <!-- Formulário: adicionar alimento -->
+    <section class="bg-white rounded-xl shadow p-5 mb-6">
+      <h2 class="text-lg font-bold text-purple-700 mb-3">➕ Adicionar / Novo alimento</h2>
+
+      <form id="formAlimento" class="grid grid-cols-1 sm:grid-cols-3 gap-3 items-end">
+        <div class="sm:col-span-2 grid gap-2">
+          <label class="text-xs text-gray-500">Nome *</label>
+          <input id="nomeAlimento" type="text" placeholder="Ex: Arroz com feijão" class="input input-bordered w-full" required />
+
+          <label class="text-xs text-gray-500 mt-2">Descrição</label>
+          <textarea id="descAlimento" rows="2" placeholder="Breve descrição (opcional)" class="textarea textarea-bordered w-full"></textarea>
+
+          <label class="text-xs text-gray-500 mt-2">Categoria</label>
+          <div class="flex gap-2">
+            <select id="categoriaAlimento" class="select select-bordered flex-1">
+              <option value="">— Selecionar categoria —</option>
+              <option value="__nova__">➕ Adicionar nova categoria...</option>
+            </select>
+            <input id="novaCategoria" type="text" placeholder="Nova categoria (se escolher)" class="input input-bordered hidden" />
+          </div>
+
+          <div class="flex gap-2 items-center mt-2">
+            <div class="w-1/3">
+              <label class="text-xs text-gray-500">Porção (número)</label>
+              <input id="porcaoAlimento" type="number" min="0" step="0.01" placeholder="ex: 1" class="input input-bordered w-full" />
+            </div>
+            <div class="w-2/3">
+              <label class="text-xs text-gray-500">Unidade da porção</label>
+              <input id="porcaoUnidade" type="text" placeholder="ex: prato, xícara, fatia, 100g" class="input input-bordered w-full" />
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-3">
+          <label class="text-xs text-gray-500">Imagem (opcional)</label>
+          <input id="imgAlimento" type="file" accept="image/*" class="file-input file-input-bordered w-full" />
+          <div class="flex items-center gap-3">
+            <img id="previewMini" src="" alt="preview" class="preview-img hidden" />
+            <button type="submit" class="btn btn-primary w-full">Salvar alimento</button>
+          </div>
+        </div>
+      </form>
+
+      <p id="msgAlimento" class="mt-3 text-center text-sm"></p>
+    </section>
+
+    <!-- Lista de alimentos -->
+    <section>
+      <h2 class="text-lg font-bold text-purple-700 mb-3">📋 Alimentos cadastrados</h2>
+      <ul id="listaAdmin" class="space-y-3">
+        <li class="p-6 bg-white rounded-lg shadow text-center text-gray-400">Carregando...</li>
+      </ul>
+    </section>
+
+    <footer class="mt-8 text-xs text-gray-500 text-center">
+      Dica: as chaves do Supabase estão no arquivo <code>painel.js</code>. Não exponha chaves de serviço (service_role).
+    </footer>
+  </div>
+
+  <!-- Carrega o script do painel (module) -->
+  <script type="module" src="painel.js"></script>
+
+  <script>
+    // UX: Preview de imagem local mesmo se painel.js não carregar ainda
+    const imgInput = document.getElementById('imgAlimento');
+    const preview = document.getElementById('previewMini');
+    imgInput?.addEventListener?.('change', (e) => {
+      const f = e.target.files?.[0];
+      if (!f) { preview.src=''; preview.classList.add('hidden'); return; }
+      const url = URL.createObjectURL(f);
+      preview.src = url;
+      preview.classList.remove('hidden');
+    });
+
+    // UX: show/hide nova categoria
+    const selCat = document.getElementById('categoriaAlimento');
+    const novaCat = document.getElementById('novaCategoria');
+    selCat?.addEventListener?.('change', () => {
+      if (selCat.value === '__nova__') { novaCat.classList.remove('hidden'); novaCat.focus(); }
+      else { novaCat.classList.add('hidden'); novaCat.value = ''; }
+    });
+  </script>
+</body>
+</html>

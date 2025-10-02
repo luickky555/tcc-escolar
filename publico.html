@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="cupcake">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Cardápio Escolar — Público | CETI Patronato N. S. de Lourdes</title>
+
+  <!-- Tailwind + DaisyUI -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { plugins: [daisyui] }</script>
+
+  <!-- seu CSS local (arquivo existente: publico.css) -->
+  <link rel="stylesheet" href="publico.css" />
+
+  <!-- AOS -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
+
+  <!-- SweetAlert2 / Lottie -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
+</head>
+<body class="min-h-screen p-6 bg-gradient-to-br from-pink-50 via-purple-50 to-white">
+
+  <div class="max-w-6xl mx-auto relative">
+
+    <img src="brasao.png" alt="Brasão" class="hero-watermark" style="position:absolute;right:18px;top:10px;width:140px;opacity:0.06;pointer-events:none" />
+
+    <header class="mb-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-4">
+        <img src="brasao.png" alt="Brasão" class="brasao" style="width:72px;height:72px;object-fit:contain;border-radius:10px;padding:6px" />
+        <div>
+          <h1 class="text-4xl sm:text-5xl font-extrabold" style="background:linear-gradient(90deg,#7c3aed,#0b5f3a);-webkit-background-clip:text;-webkit-text-fill-color:transparent">
+            🍎 Cardápio da Semana
+          </h1>
+          <p class="text-sm text-gray-600 mt-1">CETI Patronato N. S. de Lourdes — Campo Maior - PI</p>
+        </div>
+      </div>
+
+      <div class="w-full sm:w-auto">
+        <div class="flex gap-3 items-center justify-end">
+          <input id="inputBusca" type="search" placeholder="🔎 Buscar por nome ou descrição..." class="input input-bordered w-full sm:w-[420px]" />
+          <select id="selectOrdenar" class="select select-bordered ml-2">
+            <option value="novo">Mais recentes</option>
+            <option value="cal-asc">Calorias ↑</option>
+            <option value="cal-desc">Calorias ↓</option>
+            <option value="nome">Nome (A → Z)</option>
+          </select>
+          <button id="btnMostrarTodos" class="btn btn-ghost ml-2">Mostrar Todos</button>
+          <button id="btnFavoritos" class="btn btn-outline ml-1">♥ Favoritos</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="mb-6">
+      <div class="swiper mySwiper">
+        <div class="swiper-wrapper" id="swiperWrapper">
+          <div class="swiper-slide btn btn-ghost" data-cat="Todos">Todos</div>
+        </div>
+      </div>
+    </div>
+
+    <main>
+      <div id="gridContainer" class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="col-span-full flex justify-center items-center" id="loadingBox">
+          <lottie-player src="https://assets6.lottiefiles.com/packages/lf20_j1adxtyb.json" background="transparent" speed="1" style="width:140px;height:140px;" loop autoplay></lottie-player>
+        </div>
+      </div>
+    </main>
+
+    <footer class="mt-10 small text-center">
+      <div class="mb-2">Desenvolvido para <strong>CETI Patronato Nossa Senhora de Lourdes</strong> — Campo Maior, PI</div>
+    </footer>
+  </div>
+
+  <!-- JS libs -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
+  <!-- seu script local (arquivo existente: script.js) -->
+  <script type="module" src="script.js"></script>
+
+  <script>
+    AOS.init({ once: true, duration: 700 });
+    (function tryInitSwiper(){
+      if (window.Swiper) setTimeout(()=> { try { new Swiper('.mySwiper', { slidesPerView: 'auto', spaceBetween: 8, freeMode: true }); } catch(e){} }, 200);
+    })();
+  </script>
+</body>
+</html>
