@@ -44,7 +44,7 @@ A interface é leve, acessível e inspirada no universo pirata (tema One Piece),
 ## 💾 Como rodar localmente
 
 ```bash
-git clone https://github.com/YOUR-USER/tcc-escolar.git
+git clone https://github.com/luickky555/tcc-escolar.git
 cd tcc-escolar
 # Abra publico.html no navegador ou rode servidor local
 python -m http.server 5500
