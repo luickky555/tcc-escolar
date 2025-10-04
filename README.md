@@ -1,7 +1,7 @@
 <h1 align="center">🏴‍☠️ TCC Escolar — Cardápio Interativo</h1>
 
 <p align="center">
-  <img src="/assets/onepiece.png" alt="Banner One Piece - TCC Escolar" width="1200"/>
+  <img src="./assets/onepiece.png.png" alt="Banner One Piece - TCC Escolar" width="1200"/>
 </p>
 
 <p align="center">
