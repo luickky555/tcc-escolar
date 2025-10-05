@@ -15,7 +15,7 @@
 ## 🏝️ Sobre o Projeto
 
 **tcc-escolar** — um cardápio interativo que mostra os macronutrientes e aumenta nosso conhecimento sobre o que comemos.  
-A interface é leve, acessível e inspirada no universo pirata (tema One Piece), com foco em aprendizagem nutricional.
+A interface é leve, acessível, com foco em aprendizagem nutricional.
 
 ---
 
@@ -36,7 +36,7 @@ A interface é leve, acessível e inspirada no universo pirata (tema One Piece),
 
 - Cardápio interativo com dados nutricionais (proteínas, carboidratos, gorduras)  
 - Visualização dinâmica de macronutrientes por item  
-- Design responsivo e tema One Piece  
+- Design responsivo 
 - Fácil integração com Supabase / Firebase
 
 ---
