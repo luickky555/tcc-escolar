@@ -1,0 +1,162 @@
+:root{
+  --bg-start: #ff5f94; /* rosa */
+  --bg-mid: #f9734b;   /* laranja/rosado */
+  --card-grad-start: rgba(255,255,255,0.06);
+  --card-grad-end: rgba(255,255,255,0.02);
+  --accent: rgba(0,0,0,0.08);
+  --input-bg: rgba(255,255,255,0.95);
+  --muted: #9ca3af;
+}
+
+/* Fonte global */
+html, body {
+  font-family: 'Montserrat', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Mantém seu gradiente de fundo (vindo do body no HTML),
+   mas suaviza e adiciona leve ruído visual */
+body {
+  background: linear-gradient(135deg, var(--bg-start) 0%, #ff7a73 35%, #ffa24b 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+/* Card do login */
+.card {
+  width: 24rem; /* w-96 no Tailwind = 24rem */
+  border-radius: 12px;
+  overflow: visible;
+  position: relative;
+  padding: 0;
+  background: linear-gradient(180deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0.02) 100%);
+  box-shadow:
+    0 28px 40px rgba(0,0,0,0.28),   /* sombra maior abaixo */
+    0 6px 18px rgba(0,0,0,0.12);     /* sombra mais suave */
+  border: 1px solid rgba(255,255,255,0.06);
+  transform: translateY(0);
+  transition: transform .35s cubic-bezier(.2,.9,.3,1), box-shadow .35s;
+  backdrop-filter: blur(6px) saturate(120%);
+}
+
+/* Leve hover/active effect */
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 40px 60px rgba(0,0,0,0.32),
+    0 10px 26px rgba(0,0,0,0.14);
+}
+
+/* Card body (conteúdo interno) */
+.card .card-body {
+  padding: 2.25rem 2rem;
+}
+
+/* Título com emoji e alinhamento */
+.card-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  justify-content: center;
+  margin: 0;
+  color: #0b1020;
+  font-size: 1.6rem; /* 3xl no tailwind ~1.875rem, ajustei */
+  font-weight: 800;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.04);
+}
+
+/* Subtítulo */
+.card p {
+  margin: 0.25rem 0 0;
+  color: var(--muted);
+  font-weight: 500;
+  text-align: center;
+}
+
+/* Form - espaçamento */
+#loginForm {
+  margin-top: 1.25rem;
+}
+
+/* Inputs estilo "limpo" */
+.input.input-bordered {
+  background: var(--input-bg) !important;
+  border-radius: 6px;
+  border: 1px solid rgba(16,24,40,0.06);
+  padding: 0.65rem 0.9rem;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
+  transition: box-shadow .18s, transform .12s, border-color .18s;
+  font-size: 0.95rem;
+  color: #111827;
+}
+
+/* Placeholder e foco */
+.input.input-bordered::placeholder {
+  color: #9ca3af;
+  opacity: 1;
+}
+
+.input.input-bordered:focus {
+  outline: none;
+  border-color: rgba(0,0,0,0.12);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  transform: translateY(-1px);
+}
+
+/* Botão estilo discreto, centralizado */
+.btn.btn-primary {
+  background: transparent;
+  border: none;
+  margin-top: 0.25rem;
+  padding: 0.7rem 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 6px;
+  color: #0b1020;
+  letter-spacing: 0.2px;
+  box-shadow: inset 0 -28px 40px rgba(255,255,255,0.02), 0 6px 18px rgba(0,0,0,0.08);
+  transition: transform .18s, box-shadow .18s, background .18s;
+}
+
+/* Botão ao passar o mouse */
+.btn.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 36px rgba(0,0,0,0.12);
+}
+
+/* Mensagem abaixo do formulário */
+#msg {
+  color: #0b1020;
+  font-size: 0.95rem;
+}
+
+/* Pequeno destaque visual atrás do card (baixo-esquerda) */
+.card::after{
+  content: "";
+  position: absolute;
+  left: -10%;
+  top: 55%;
+  width: 120%;
+  height: 64%;
+  z-index: -1;
+  background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
+  filter: blur(28px) saturate(120%);
+  transform: rotate(-2deg);
+  border-radius: 8px;
+}
+
+/* Responsividade */
+@media (max-width: 420px){
+  .card {
+    width: 92%;
+    margin: 0 16px;
+  }
+  .card .card-body { padding: 1.5rem; }
+  .card-title { font-size: 1.35rem; }
+}
